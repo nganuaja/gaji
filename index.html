@@ -43,27 +43,40 @@
     const sfxOk = document.getElementById("sfxOk");
 
     function pindahTempat(event) {
-      const btn = event.target;
-      const parent = btn.parentElement;
-      const maxX = parent.offsetWidth - btn.offsetWidth;
-      const maxY = parent.offsetHeight - btn.offsetHeight;
+	  const btn = event.target;
+	  const parent = btn.parentElement;
+	  const maxX = parent.offsetWidth - btn.offsetWidth;
+	  const maxY = parent.offsetHeight - btn.offsetHeight;
 
-      btn.style.pointerEvents = "none";
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
-      btn.style.left = `${randomX}px`;
-      btn.style.top = `${randomY}px`;
+	  let randomX, randomY;
 
-      btn.classList.add("shake");
-      setTimeout(() => btn.classList.remove("shake"), 300);
+	  // Ambil posisi sekarang
+	  const currentX = btn.offsetLeft;
+	  const currentY = btn.offsetTop;
 
-      sfxPindah.currentTime = 0;
-      sfxPindah.play();
+	  do {
+		randomX = Math.floor(Math.random() * maxX);
+	  } while (Math.abs(randomX - currentX) < 50); // jaga jarak minimal 50px
 
-      setTimeout(() => {
-        btn.style.pointerEvents = "auto";
-      }, 300);
-    }
+	  do {
+		randomY = Math.floor(Math.random() * maxY);
+	  } while (Math.abs(randomY - currentY) < 50); // jaga jarak minimal 50px
+
+	  btn.style.pointerEvents = "none";
+	  btn.style.left = `${randomX}px`;
+	  btn.style.top = `${randomY}px`;
+
+	  btn.classList.add("shake");
+	  setTimeout(() => btn.classList.remove("shake"), 300);
+
+	  sfxPindah.currentTime = 0;
+	  sfxPindah.play();
+
+	  setTimeout(() => {
+		btn.style.pointerEvents = "auto";
+	  }, 300);
+	}
+
 
     function tampilPertanyaan() {
       content.innerHTML = `
