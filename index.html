@@ -86,30 +86,6 @@
 		  pindahTempat(e);
       });
     }
-	
-	function pindahTempat(event) {
-  const btn = event.target;
-  const parent = btn.parentElement;
-  const maxX = parent.offsetWidth - btn.offsetWidth;
-  const maxY = parent.offsetHeight - btn.offsetHeight;
-
-  btn.style.pointerEvents = "none";
-  const randomX = Math.floor(Math.random() * maxX);
-  const randomY = Math.floor(Math.random() * maxY);
-  btn.style.left = `${randomX}px`;
-  btn.style.top = `${randomY}px`;
-
-  btn.classList.add("shake");
-  setTimeout(() => btn.classList.remove("shake"), 300);
-
-  sfxPindah.currentTime = 0;
-  sfxPindah.play();
-
-  setTimeout(() => {
-    btn.style.pointerEvents = "auto";
-  }, 300);
-}
-
 
     function jawabanYa() {
       sfxYa.currentTime = 0;
@@ -127,7 +103,7 @@
     function jawabanOk() {
       sfxOk.currentTime = 0;
       sfxOk.play();
-      setTimeout(tampilPertanyaan, 600);
+      setTimeout(tampilPertanyaan, 600); // kasih delay biar suara selesai
     }
 
     tampilPertanyaan();
