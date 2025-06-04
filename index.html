@@ -7,6 +7,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <style>
+	.btn-ya:hover {
+	  transform: scale(1.2) rotate(3deg);
+	  transition: transform 0.2s ease-in-out;
+	}
+
+	.btn-ok:hover {
+	  transform: scale(1.1);
+	  transition: transform 0.2s ease-in-out;
+	}
+
     .btn-tidak {
       position: absolute;
       transition: 0.2s ease-in-out;
@@ -80,9 +90,9 @@
 
     function tampilPertanyaan() {
       content.innerHTML = `
-        <h1>Apakah Anda puas dengan gaji untuk pekerjaan Anda saat ini?</h1><br><br><br>
+        <h2>Apakah Anda puas dengan gaji untuk pekerjaan Anda saat ini?</h2><br><br><br>
         <div class="mt-4 position-relative" style="height: 300px;">
-          <button class="btn btn-outline-success btn-lg me-3" onclick="jawabanYa()" style="margin-left:-100px;">YA</button>
+          <button class="btn btn-outline-success btn-lg btn-ya me-3" onclick="jawabanYa()" style="margin-left:-100px;">YA</button>
           <button id="btnTidak" class="btn btn-outline-danger btn-lg btn-tidak">TIDAK</button>
         </div><br><br>
 		<small style="margin-left:-20px;">#katapaman | @pakposkeren</small>
@@ -105,11 +115,11 @@
       sfxYa.play();
 
       content.innerHTML = `
-        <h2><span class="text-success" style="font-size:50px;">OK, BAGUS !!</span><br>Silahkan kembali bekerja!</h2>
+        <h1><span class="text-success" style="font-size:50px;">OK, BAGUS !!</span></h1><br><h3>Silahkan kembali bekerja!<br>Terimakasih..</h3>
         <br>
-        <p class="text-danger"><strong>( Divisi HRD )</strong></p>
-        <br><br><br>
-        <button class="btn btn-primary btn-lg" onclick="jawabanOk()">OK</button>
+        <p class="text-danger"><strong>( Divisi HRD Konoha )</strong></p>
+        <br><hr class="mx-auto" style="width: 300px;">
+        <button class="btn btn-primary btn-lg btn-ok" onclick="jawabanOk()">OK</button>
       `;
     }
 
