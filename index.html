@@ -27,7 +27,7 @@
   </style>
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-<div class="container p-3">
+<div class="container p-4">
   <div id="content" class="text-center"></div>
 </div>
   <!-- Suara -->
@@ -78,11 +78,38 @@
       const btnTidak = document.getElementById("btnTidak");
       btnTidak.addEventListener("mouseenter", pindahTempat);
       btnTidak.addEventListener("mousemove", pindahTempat);
-      btnTidak.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      <!-- btnTidak.addEventListener("click", (e) => { -->
+        <!-- e.preventDefault(); -->
+        <!-- e.stopPropagation(); -->
+	  btnTidak.addEventListener("touchstart", (e) => {
+		  e.preventDefault();
+		  pindahTempat(e);
       });
     }
+	
+	function pindahTempat(event) {
+  const btn = event.target;
+  const parent = btn.parentElement;
+  const maxX = parent.offsetWidth - btn.offsetWidth;
+  const maxY = parent.offsetHeight - btn.offsetHeight;
+
+  btn.style.pointerEvents = "none";
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+  btn.style.left = `${randomX}px`;
+  btn.style.top = `${randomY}px`;
+
+  btn.classList.add("shake");
+  setTimeout(() => btn.classList.remove("shake"), 300);
+
+  sfxPindah.currentTime = 0;
+  sfxPindah.play();
+
+  setTimeout(() => {
+    btn.style.pointerEvents = "auto";
+  }, 300);
+}
+
 
     function jawabanYa() {
       sfxYa.currentTime = 0;
@@ -100,7 +127,7 @@
     function jawabanOk() {
       sfxOk.currentTime = 0;
       sfxOk.play();
-      setTimeout(tampilPertanyaan, 600); // kasih delay biar suara selesai
+      setTimeout(tampilPertanyaan, 600);
     }
 
     tampilPertanyaan();
